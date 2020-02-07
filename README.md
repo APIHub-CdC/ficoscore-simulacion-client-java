@@ -1,4 +1,4 @@
-# FICO Score simulación
+# FICO Score v2 simulación
 
 
 La API de FICO Score determina la probabilidad de incumplimiento de un acreditado en los próximos doce meses. A mayor puntaje de score, menor es el riesgo.
