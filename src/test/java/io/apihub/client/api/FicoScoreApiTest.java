@@ -39,25 +39,25 @@ public class FicoScoreApiTest {
     
     @Test
     public void getReporteTest() throws ApiException {
-        String xApiKey = "kCxyo6Z8TXXOo0Mw8Lodv2cKTNu6b7KG";
+        String xApiKey = "XXXXX";
 
         Peticion peticion = new Peticion();
 
-        peticion.setFolio("1235");
+        peticion.setFolio("XXXX");
 
         Persona persona = new Persona();
-        persona.setNombres("Erick");
-        persona.setApellidoPaterno("OLIVOS");
-        persona.setApellidoMaterno("JIMENEZ");
-        persona.setFechaNacimiento("13-05-1966");
+        persona.setNombres("XXXX");
+        persona.setApellidoPaterno("XXXX");
+        persona.setApellidoMaterno("XXX");
+        persona.setFechaNacimiento("DD-MM-YYYY");
         persona.setRFC("CUPU800825569");
 
         Domicilio domicilio = new Domicilio();
-        domicilio.setDireccion("san joaquin");
-        domicilio.setColoniaPoblacion("el arenal");
-        domicilio.setCiudad("mexico");
-        domicilio.setCP("12345");
-        domicilio.setDelegacionMunicipio("iztapalapa");
+        domicilio.setDireccion("XXXXXX");
+        domicilio.setColoniaPoblacion("XXXXX");
+        domicilio.setCiudad("XXXXXX");
+        domicilio.setCP("XXXXXX");
+        domicilio.setDelegacionMunicipio("XXXXXXX");
         domicilio.setEstado(CatalogoEstados.CDMX);
 
         persona.setDomicilio(domicilio);
