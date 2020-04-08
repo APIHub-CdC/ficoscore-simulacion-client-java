@@ -22,7 +22,7 @@ mvn install -Dmaven.test.skip=true
 
 ### Paso 1. Agregar el producto a la aplicación
 
-Al iniciar sesión seguir os siguientes pasos:
+Al iniciar sesión seguir los siguientes pasos:
 
  1. Dar clic en la sección "**Mis aplicaciones**".
  2. Seleccionar la aplicación.
