@@ -1,4 +1,4 @@
-# FICO Score v2 simulación
+# ficoscore-simulacion-client-java
 
 
 La API de FICO Score determina la probabilidad de incumplimiento de un acreditado en los próximos doce meses. A mayor puntaje de score, menor es el riesgo.
@@ -43,8 +43,8 @@ Los siguientes datos a modificar se encuentran en ***src/test/java/io/apihub/cli
 Es importante contar con el setUp() que se encargará de inicializar la url. Modificar la URL ***('the_url')***, como se muestra en el siguiente fragmento de código:
 
 ```java
-private Logger logger = LoggerFactory.getLogger(TelecosSimulacionApiTest.class.getName());
-private final TelecosSimulacionApi api = new TelecosSimulacionApi(); 
+private Logger logger = LoggerFactory.getLogger(FicoScoreApiTest.class.getName());
+private final FicoScoreApi api = new FicoScoreApi(); 
 private ApiClient apiClient = null;
 
 @Before()
