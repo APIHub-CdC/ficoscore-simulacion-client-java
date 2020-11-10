@@ -1,7 +1,7 @@
-# ficoscore-simulacion-client-java
+# ficoscore-simulacion-client-java [![GitHub Packages](https://img.shields.io/badge/Maven&nbsp;package-Last&nbsp;version-lemon)](https://github.com/orgs/APIHub-CdC/packages?repo_name=ficoscore-simulacion-client-java) 
 
 
-La API de FICO Score determina la probabilidad de incumplimiento de un acreditado en los próximos doce meses. A mayor puntaje de score, menor es el riesgo.
+La API de FICO Score determina la probabilidad de incumplimiento de un acreditado en los próximos doce meses. A mayor puntaje de score, menor es el riesgo.<br/><img src='https://github.com/APIHub-CdC/imagenes-cdc/blob/master/circulo_de_credito-apihub.png' height='37' width='160'/></p><br/>
 
 ## Requisitos
 
@@ -38,68 +38,69 @@ Al iniciar sesión seguir los siguientes pasos:
 
 ### Paso 2. Capturar los datos de la petición
 
-Los siguientes datos a modificar se encuentran en ***src/test/java/io/apihub/client/api/FicoScpreApiTest.java***
+Los siguientes datos a modificar se encuentran en ***src/test/java/com/cdc/apihub/mx/FS/simulacion/test/ApiTest.java***
 
 Es importante contar con el setUp() que se encargará de inicializar la url. Modificar la URL ***('the_url')***, como se muestra en el siguiente fragmento de código:
 
 ```java
-private Logger logger = LoggerFactory.getLogger(FicoScoreApiTest.class.getName());
-private final FicoScoreApi api = new FicoScoreApi(); 
-private ApiClient apiClient = null;
+private Logger logger = LoggerFactory.getLogger(ApiTest.class.getName());
+private final FSApi api = new FSApi();
+private ApiClient apiClient;
+private String xApiKey = "your_api_key";
+private String url = "the_url";
 
 @Before()
 public void setUp() {
-	this.apiClient = api.getApiClient();
-	this.apiClient.setBasePath("the_url");
-	OkHttpClient insecureClient = ApiClient.getClientNoSSLVerification();
-	OkHttpClient okHttpClient = insecureClient.newBuilder()
-			.readTimeout(60, TimeUnit.SECONDS)
-			.build();
-	apiClient.setHttpClient(okHttpClient);	
-} 
+    this.apiClient = api.getApiClient();
+     this.apiClient.setBasePath(url);
+     OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+            .readTimeout(30, TimeUnit.SECONDS)
+            .build();
+     apiClient.setHttpClient(okHttpClient);
+}
 ```
+De igual manera, en el archivo **ApiTest**, se deberá modificar el siguiente fragmento de código con los datos correspondientes:
 
-En el archivo **FicoScpreApiTest**, que se encuentra en ***src/test/java/io/apihub/client/api*** se deberá modificar el siguiente fragmento de código con los datos correspondientes:
+> **NOTA:** Para más ejemplos de simulación, consulte la colección de Postman.
 
 ```java
 @Test
-  public void getReporteTest() throws ApiException {
-        String xApiKey = "XXXXXX";
+public void getReporteTest() throws ApiException {
 
-        Peticion peticion = new Peticion();
+    Peticion peticion = new Peticion();
 
-        peticion.setFolio("XXXXX");
+    peticion.setFolio("123456");
 
-        Persona persona = new Persona();
-        persona.setNombres("XXXXX");
-        persona.setApellidoPaterno("XXXXXX");
-        persona.setApellidoMaterno("XXXXX");
-        persona.setFechaNacimiento("DD-MM-YYYY");
-        persona.setRFC("XXXXXXXXXX");
+    Persona persona = new Persona();
+    persona.setNombres("JUAN");
+    persona.setApellidoPaterno("SESENTAYDOS");
+    persona.setApellidoMaterno("PRUEBA");
+    persona.setFechaNacimiento("1965-08-09");
+    persona.setRFC("SEPJ650809JG1");
 
-        Domicilio domicilio = new Domicilio();
-        domicilio.setDireccion("XXXXXXXX");
-        domicilio.setColoniaPoblacion("XXXXXX");
-        domicilio.setCiudad("XXXXXX");
-        domicilio.setCP("XXXXX");
-        domicilio.setDelegacionMunicipio("XXXXXXX");
-        domicilio.setEstado(CatalogoEstados.CDMX);
+    Domicilio domicilio = new Domicilio();
+    domicilio.setDireccion("PASADISO ENCONTRADO 58");
+    domicilio.setColoniaPoblacion("MONTEVIDEO");
+    domicilio.setCiudad("CIUDAD DE MÉXICO");
+    domicilio.setCP("07730");
+    domicilio.setDelegacionMunicipio("GUSTAVO A MADERO");
+    domicilio.setEstado(CatalogoEstados.CDMX);
 
-        persona.setDomicilio(domicilio);
+    persona.setDomicilio(domicilio);
 
-        peticion.setPersona(persona);
+    peticion.setPersona(persona);
 
-        try {
-            Respuesta response = api.getReporte(xApiKey, peticion);
+    try {
+        Respuesta response = api.getReporte(xApiKey, peticion);
 
-            Assert.assertTrue(response != null);
-            if(response != null) {
-                logger.info(response.toString());
-            }
-        } catch (ApiException e) {
-            logger.info(e.getResponseBody());
+        Assert.assertTrue(response != null);
+        if(response != null) {
+            logger.info(response.toString());
         }
+    } catch (ApiException e) {
+        logger.info(e.getResponseBody());
     }
+}
 ```
 
 ### Paso 3. Ejecutar la prueba unitaria
